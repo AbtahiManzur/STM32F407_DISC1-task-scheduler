@@ -179,17 +179,13 @@ void update_current_psp(uint32_t current_psp) {
 }
 
 void update_current_task(void) {
-	current_task++;
-	current_task %= MAX_TASKS;
-
-	for(uint32_t i = 0; i < MAX_TASKS + 1; i++) {
+	for(uint32_t i = 0; i < MAX_TASKS; i++) {
+		current_task++;
+		current_task %= MAX_TASKS;
 		if((user_tasks[current_task].current_state == TASK_READY_STATE) && (current_task != 0)){
 			return;
 		}
-		current_task++;
-		current_task %= MAX_TASKS;
 	}
-
 	current_task = 0;
 }
 
